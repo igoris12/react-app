@@ -1,25 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import React from "react";
+import Tasks from "./components/Tasks";
+import { useState } from "react"
+import AddTasks from "./components/AddTasks";
+
+
 
 function App() {
+  const [showAdd, setShowAdd] = useState(false)
+
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      text: 'Do simething 1',
+      day: 'Feb 5th at 2:30pm',
+      reminder: true,
+    },
+    {
+      id: 2,
+      text: 'Do simething 2',
+      day: 'Feb 6th at 2:30pm',
+      reminder: true,
+    },
+    {
+      id: 3,
+      text: 'Do simething 3',
+      day: 'Feb 8th at 2:30pm',
+      reminder: true,
+    },
+    {
+      id: 4,
+      text: 'Do simething 4',
+      day: 'Feb 9th at 2:30pm',
+      reminder: false,
+    },
+  ])
+
+  // add task
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 1000) + 1
+
+    const newTask = { id, ...task }
+    setTasks([...tasks, newTask])
+  }
+
+
+  // delete func
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id))
+  }
+  // reminder func
+  const toggleReminder = (id) => {
+    setTasks(tasks.map((task) =>
+      task.id === id ? { ...task, reminder: !task.reminder } : task
+    )
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Header onAdd={() => setShowAdd(!showAdd)}
+        showAddTaskValue={showAdd} />
+
+      {showAdd && <AddTasks onAdd={addTask} />}
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}
+      /> : 'Nothing to do you can go to sleep'}
     </div>
   );
 }
+
+
 
 export default App;
