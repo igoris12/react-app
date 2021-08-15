@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import React from "react";
 import Tasks from "./components/Tasks";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import AddTasks from "./components/AddTasks";
 
 
@@ -10,6 +10,8 @@ function App() {
   const [showAdd, setShowAdd] = useState(false)
 
   const [tasks, setTasks] = useState([])
+
+  // useEffect()
 
   // add task
   const addTask = (task) => {
