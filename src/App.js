@@ -11,8 +11,22 @@ function App() {
 
   const [tasks, setTasks] = useState([])
 
-  // useEffect()
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
+    }
 
+    getTasks();
+
+  }, [])
+
+
+  const fetchTasks = async () => {
+    const res = await fetch('http://localhost:5000/tasks')
+    const data = await res.json()
+    return data
+  }
   // add task
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 1000) + 1
@@ -24,6 +38,10 @@ function App() {
 
   // delete func
   const deleteTask = (id) => {
+    fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE',
+    })
+
     setTasks(tasks.filter((task) => task.id !== id))
   }
   // reminder func
