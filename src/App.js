@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import React from "react";
 import Tasks from "./components/Tasks";
-import { useState, useEffect } from "react"
 import AddTasks from "./components/AddTasks";
-
+import Footer from "./components/Footer";
+import About from "./components/About";
 
 
 function App() {
@@ -90,14 +92,25 @@ function App() {
   }
 
   return (
-    <div className='container'>
-      <Header onAdd={() => setShowAdd(!showAdd)}
-        showAddTaskValue={showAdd} />
+    <Router>
+      <div className='container'>
+        <Header onAdd={() => setShowAdd(!showAdd)}
+          showAddTaskValue={showAdd} />
 
-      {showAdd && <AddTasks onAdd={addTask} />}
-      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}
-      /> : 'Nothing to do you can go to sleep'}
-    </div>
+
+        <Route path="/" exact render={(pros) =>
+        (<>
+          {showAdd && <AddTasks onAdd={addTask} />}
+          {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}
+          /> : 'Nothing to do you can go to sleep'}
+        </>
+        )} />
+
+        <Route path="/about" component={About} />
+        <Footer />
+      </div>
+    </Router>
+
   );
 }
 
