@@ -4,7 +4,7 @@ const About = () => {
     return (
         <div>
             <h4>It was me work for study</h4>
-            <Link to="/">Back</Link>
+            <Link to="/">To task list</Link>
         </div>
     )
 }
