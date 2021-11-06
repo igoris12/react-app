@@ -1,1 +1,1 @@
-# react-app link: https://igoris12.github.io/about
+# link: https://igoris12.github.io/react-app/
