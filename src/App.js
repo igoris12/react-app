@@ -4,8 +4,8 @@ import Header from "./components/Header";
 import React from "react";
 import Tasks from "./components/Tasks";
 import AddTasks from "./components/AddTasks";
-import Footer from "./components/Footer";
-import About from "./components/About";
+// import Footer from "./components/Footer";
+// import About from "./components/About";
 
 
 function App() {
@@ -54,20 +54,17 @@ function App() {
   return (
     <Router>
       <div className='container'>
+
+
         <Header onAdd={() => setShowAdd(!showAdd)}
           showAddTaskValue={showAdd} />
-
-
-        <Route path="/" exact render={(pros) =>
+        <Route path="/react-app/`" exact render={(pros) =>
         (<>
           {showAdd && <AddTasks onAdd={addTask} />}
           {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}
           /> : 'Nothing to do you can go to sleep'}
         </>
         )} />
-
-        <Route path="/about" component={About} />
-        <Footer />
       </div>
     </Router>
 
